@@ -1,0 +1,42 @@
+{
+	"name": "nativescript-socketio",
+	"version": "1.0.0",
+	"description": "SocketIO for nativescript",
+	"main": "socketio.js",
+	"nativescript": {
+		"platforms": {
+			"android": "1.6.3",
+			"ios": "1.6.0"
+		}
+	},
+	"scripts": {
+		"build": "",
+		"demo.ios": "npm run preparedemo; cd demo; tns emulate ios",
+		"demo.android": "npm run preparedemo; cd demo; tns run android",
+		"preparedemo": "cd demo; tns plugin remove nativescript-socketio; tns plugin add ..; tns install",
+		"setup": "cd demo; npm install; cd ..; cd demo; tns plugin add ..; cd .."
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/triniwiz/nativescript-socketio.git"
+	},
+	"keywords": [
+		"NativeScript",
+		"JavaScript",
+		"Android",
+		"iOS"
+	],
+	"author": {
+		"name": "Osei Fortune",
+		"email": "fortune.osei@yahoo.com"
+	},
+	"bugs": {
+		"url": "https://github.com/triniwiz/nativescript-socketio/issues"
+	},
+	"license": {
+		"type": "MIT",
+		"url": "https://github.com/triniwiz/nativescript-socketio/blob/master/LICENSE"
+	},
+	"homepage": "https://github.com/triniwiz/nativescript-socketio",
+	"readmeFilename": "README.md"
+}
