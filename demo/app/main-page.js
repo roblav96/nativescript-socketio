@@ -1,8 +1,7 @@
 'use strict'
 let Observable = require('data/observable').Observable;
 let ObservableArray = require('data/observable-array').ObservableArray;
-let common = require('./shared/nativescript-socketio/socketio.common');
-let SocketIO = require('./shared/nativescript-socketio/socketio');
+let SocketIO = require('nativescript-socketio');
 let pages = require('ui/page');
 let frameModule = require('ui/frame');
 let pageData = new Observable({
@@ -47,5 +46,5 @@ SocketIO.on('getMessages',function(data){
     }
 
   }*/
- 
+
 })
