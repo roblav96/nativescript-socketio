@@ -1,3 +1,3 @@
 'use strict'
-let Common = {};
-module.exports = Common;
+let SocketIO = {};
+module.exports = SocketIO;

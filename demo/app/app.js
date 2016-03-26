@@ -1,3 +1,3 @@
-﻿'use strict'
-let application = require('application');
+"use strict";
+var application = require('application');
 application.start({ moduleName: 'login' });

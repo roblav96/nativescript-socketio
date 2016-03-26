@@ -1,19 +1,26 @@
 'use strict'
-let Common = require('./socketio.common').Common;
-let SocketIO  = {};
-SocketIO.socket = null;
+let SocketIO = require('./socketio.common');
+let jsonHelper = require('./helpers/jsonHelper');
+SocketIO.init = function (url, args) {
 
-SocketIO.init = function(url, args) {
-};
+}
 
 SocketIO.on = function (event, callback) {
+
 }
 SocketIO.connect = function () {
+
 }
+
 SocketIO.emit = function (event) {
 
 }
 SocketIO.disconnect = function () {
+
+}
+SocketIO.getInstance = function () {
+
 }
 
-module.exports =  SocketIO; 
+module.exports = SocketIO;
+

@@ -1,17 +1,17 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatingTo="navigatingTo">
 
     <GridLayout columns="2*,*" rows="auto, *">
-      <TextField hint="Enter text" text="{{ textMessage }}" row="0"/>
-      <Button col="1" text="Add" tap="sendText" row="0"/>
+        <TextField hint="Enter text" text="{{ textMessage }}" row="0" />
+        <Button col="1" text="Add" tap="sendText" row="0" />
 
-    <ListView items="{{ list }}" colSpan="2" row="1">
-      <ListView.itemTemplate>
-      <GridLayout columns="*,*,*">
-        <Label text="{{ username }}"/>
-        <Label text="{{ message }}" col="1"/>
-        <Label text="{{ timeStamp }}" col="2"/>
-      </GridLayout>
-      </ListView.itemTemplate>
-    </ListView>
-</GridLayout>
+        <ListView id="lv" items="{{ list }}" colSpan="2" row="1">
+            <ListView.itemTemplate>
+                    <GridLayout columns="*,*,*" class="{{ username,username === $parents['Page'].currentUser ? 'message-right' : 'message-left'}}">
+                        <Label text="{{ username }}"  />
+                        <Label text="{{ message }}" col="1"  />
+                        <Label text="{{ timeStamp }}" col="2" />
+                    </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
 </Page>
