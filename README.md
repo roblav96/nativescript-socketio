@@ -1,7 +1,7 @@
 # nativescript-socketio
 # Usage
 ```
-tns plugin install https://github.com/triniwiz/nativescript-socketio
+tns plugin add https://github.com/triniwiz/nativescript-socketio
 ```
 Set connection string and options then connect
 ```js
