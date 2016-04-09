@@ -21,3 +21,17 @@ Set instance
 ```js
 new SocketIO(null,null,oldInstance)
 ```
+##Running Demo
+
+Start socketio server
+```
+cd demo/demo-server
+npm install
+node app
+```
+
+start demo
+```
+cd demo
+tns run android
+```
