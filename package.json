@@ -1,7 +1,7 @@
 {
 	"name": "nativescript-socketio",
-	"version": "1.0.1",
-	"description": "SocketIO for nativescript",
+	"version": "1.0.2",
+	"description": "Socket.IO for nativescript",
 	"main": "socketio.js",
 	"nativescript": {
 		"platforms": {
@@ -24,7 +24,7 @@
 		"NativeScript",
 		"JavaScript",
 		"Android",
-		"iOS"
+        "socket.io"
 	],
 	"author": {
 		"name": "Osei Fortune",

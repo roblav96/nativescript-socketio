@@ -5,12 +5,13 @@
       "version": "1.6.0"
     },
     "tns-android": {
-      "version": "1.6.3"
+      "version": "1.7.1"
     }
   },
   "dependencies": {
+    "moment": "^2.12.0",
     "nativescript-socketio": "file:..",
-    "tns-core-modules": "1.6.2"
+    "tns-core-modules": "^1.7.1"
   },
   "devDependencies": {
     "nativescript-dev-typescript": "^0.3.1",

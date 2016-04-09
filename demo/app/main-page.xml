@@ -1,15 +1,21 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatingTo="navigatingTo">
-
+<Page.actionBar>
+<ActionBar>
+  <ActionBar.actionItems>
+<ActionItem tap="logout" text="Logout"/>
+  </ActionBar.actionItems>
+</ActionBar>
+</Page.actionBar>
     <GridLayout columns="2*,*" rows="auto, *">
         <TextField hint="Enter text" text="{{ textMessage }}" row="0" />
         <Button col="1" text="Add" tap="sendText" row="0" />
 
         <ListView id="lv" items="{{ list }}" colSpan="2" row="1">
             <ListView.itemTemplate>
-                    <GridLayout columns="*,*,*" class="{{ username,username === $parents['Page'].currentUser ? 'message-right' : 'message-left'}}">
+                    <GridLayout columns="*,*,*" class="messages">
                         <Label text="{{ username }}"  />
                         <Label text="{{ message }}" col="1"  />
-                        <Label text="{{ timeStamp }}" col="2" />
+                        <Label text="{{ timeStamp | timeFromNow}}" col="2" />
                     </GridLayout>
             </ListView.itemTemplate>
         </ListView>

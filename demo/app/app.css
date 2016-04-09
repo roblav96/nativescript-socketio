@@ -1,16 +1,7 @@
-﻿.message-left{
- background-color: #81D4FA;
+﻿.messages{
 padding:16;
-border-radius: 8;
-}
-.message-right{
-  padding:16;
-  background-color:#BDBDBD;
-  border-radius: 8;
 }
 ListView{
   background-color: white;
  
 }
-  /*margin-left: 10;
-  margin-right: 20;*/
