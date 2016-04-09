@@ -1,7 +1,7 @@
 # nativescript-socketio
 # Usage
 ```
-tns plugin add https://github.com/triniwiz/nativescript-socketio
+npm install nativescript-socketio
 ```
 Set connection string and options then connect
 ```js
@@ -20,19 +20,4 @@ socketIO.on(event,callback)
 Set instance
 ```js
 new SocketIO(null,null,oldInstance)
-```
-
-##Running Demo
-
-Start socketio server
-```
-cd demo/demo-server
-npm install
-node app
-```
-
-start demo
-```
-cd demo
-tns run android
 ```
