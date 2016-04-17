@@ -4,9 +4,10 @@
 npm install nativescript-socketio
 ```
 Set connection string and options then connect
+
 ```js
 var SocketIO = require('nativescript-socketio');
-var socketIO = new SocketIO.init(url,opts);
+var socketIO = new SocketIO(url,opts);
 ```
 
 Send data to the server
@@ -35,3 +36,6 @@ start demo
 cd demo
 tns run android
 ```
+
+##Screenshot
+![socketio](screenshots/socketio.gif?raw=true)

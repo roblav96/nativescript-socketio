@@ -8,6 +8,7 @@ const io = require('socket.io')(server);
 let messageList = [];
 let userList = [];
 io.on('connection', function (socket) {
+	socket.emit('connected',"Welcom")
 	let addedUser = false;
 	socket.on('add user', function (data) {
 		if (addedUser) return;
