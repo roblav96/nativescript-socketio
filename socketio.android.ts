@@ -1,3 +1,4 @@
+declare var io:any;
 import common = require('./socketio.common');
 import jsonHelper = require('./helpers/jsonHelper');
 import app = require("application");
@@ -5,7 +6,6 @@ const Emitter = io.socket.emitter.Emitter;
 const IO = io.socket.client.IO;
 const Socket = io.socket.client.Socket;
 const Ack = io.socket.client.Ack;
-
 export class SocketIO extends common.SocketIO {
     socket;
     constructor(...args: any[]) {
