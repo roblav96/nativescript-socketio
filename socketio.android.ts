@@ -1,17 +1,13 @@
-declare var io:any;
-import common = require('./socketio.common');
-const jsonHelper = require('./helpers/jsonHelper');
-const app = require("application");
+declare var io: any;
+import * as jsonHelper from './helpers/jsonHelper';
+import app = require("application");
 const Emitter = io.socket.emitter.Emitter;
 const IO = io.socket.client.IO;
 const Socket = io.socket.client.Socket;
 const Ack = io.socket.client.Ack;
-export class SocketIO extends common.SocketIO {
-    
+export class SocketIO {
     socket;
-    
     constructor(...args: any[]) {
-        super();
         switch (args.length) {
             case 2:
                 let opts = new IO.Options();
@@ -25,7 +21,7 @@ export class SocketIO extends common.SocketIO {
 
     }
 
-    on(event, callback) {
+    on(event: string, callback) {
         this.socket.on(event, new Emitter.Listener({
             call: function (args) {
                 let payload = Array.prototype.slice.call(args);
@@ -87,26 +83,26 @@ export class SocketIO extends common.SocketIO {
         this.socket = instance;
     }
 
-    joinNamespace(nsp: String): void{
-        if (this.socket.connected()){
-            
+    joinNamespace(nsp: String): void {
+        if (this.socket.connected()) {
+
             const manager = this.socket.io();
             this.socket = manager.socket(nsp);
-            
+
             // Only join if currently connected. Otherwise just configure to join on connect. 
             // This mirrors IOS behavior
             this.socket.connect();
 
         }
         else {
-            
+
             const manager = this.socket.io();
             this.socket = manager.socket(nsp);
 
         }
     }
 
-    leaveNamespace(): void{
+    leaveNamespace(): void {
         // Not Implemented
     }
 
