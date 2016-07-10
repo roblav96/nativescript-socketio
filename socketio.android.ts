@@ -88,13 +88,26 @@ export class SocketIO extends common.SocketIO {
     }
 
     joinNamespace(nsp: String): void{
-        const manager = this.socket.io();
-        this.socket = manager.socket(nsp);
-        this.socket.connect();
+        if (this.socket.connected()){
+            
+            const manager = this.socket.io();
+            this.socket = manager.socket(nsp);
+            
+            // Only join if currently connected. Otherwise just configure to join on connect. 
+            // This mirrors IOS behavior
+            this.socket.connect();
+
+        }
+        else {
+            
+            const manager = this.socket.io();
+            this.socket = manager.socket(nsp);
+
+        }
     }
 
     leaveNamespace(): void{
-
+        // Not Implemented
     }
 
 }

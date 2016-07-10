@@ -3,7 +3,7 @@ import {SocketIO} from 'nativescript-socketio';
 import {} from 'ui/page';
 import frameModule = require('ui/frame');
 let socketIO;
-const server = 'http://192.168.56.1:3000'; //using genymotion
+const server = 'http://192.168.1.135:3001'; //using genymotion
 
 let pageData = new Observable({
   item: '',
@@ -16,13 +16,14 @@ export function navigatingTo() {
     console.log("Login: ", data);
     frameModule.topmost().navigate({ moduleName: 'main-page', context: { username: pageData.get("username"), socket: socketIO.instance } })
   })
-  socketIO.connect();
-  socketIO.joinNamespace('/staff');
+  socketIO.joinNamespace('/chat');
+  socketIO.connect();  
 }
 export function pageLoaded(args) {
   var page = args.object;
   page.bindingContext = pageData;
 }
 export function join(args) {
+  socketIO.leaveNamespace();
   socketIO.emit('add user', { username: pageData.get('username') });
 }

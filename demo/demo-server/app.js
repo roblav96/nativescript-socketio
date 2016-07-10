@@ -5,15 +5,13 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const nspChat = io.of('/chat');
+const nspDefault = io.nsps['/'];
 
 let messageList = [];
 let userList = [];
 
-chat.on('connect', (socket)=>{
-	console.log('Joined Namespace: /chat');
-})
-
 io.on('connection', function (socket) {
+	console.log('User Connected');
 	socket.emit('connected',"Welcom")
 	let addedUser = false;
 	socket.on('add user', function (data) {
@@ -45,6 +43,7 @@ io.on('connection', function (socket) {
 
 
 	socket.on('disconnect', function () {
+		console.log('User Disconnected');
         if (addedUser) {
 			for (let i = 0; i < userList.length; i++) {
 				if (socket.username === userList[i].username) {
@@ -58,4 +57,20 @@ io.on('connection', function (socket) {
 	});
 });
 
-server.listen(3000)
+nspDefault.on('connect', (socket)=>{
+	console.log('Joined Namespace: /');
+
+	socket.on('disconnect', ()=>{
+		console.log('Left Namespace: /');
+	});
+})
+
+nspChat.on('connect', (socket)=>{
+	console.log('Joined Namespace: /chat');
+
+	socket.on('disconnect', ()=>{
+		console.log('Left Namespace: /chat');
+	});
+});
+
+server.listen(3001)
