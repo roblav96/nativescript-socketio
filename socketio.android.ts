@@ -1,13 +1,15 @@
 declare var io:any;
 import common = require('./socketio.common');
-import jsonHelper = require('./helpers/jsonHelper');
-import app = require("application");
+const jsonHelper = require('./helpers/jsonHelper');
+const app = require("application");
 const Emitter = io.socket.emitter.Emitter;
 const IO = io.socket.client.IO;
 const Socket = io.socket.client.Socket;
 const Ack = io.socket.client.Ack;
 export class SocketIO extends common.SocketIO {
+    
     socket;
+    
     constructor(...args: any[]) {
         super();
         switch (args.length) {
@@ -15,7 +17,6 @@ export class SocketIO extends common.SocketIO {
                 let opts = new IO.Options();
                 (<any>Object).assign(opts, args[1]);
                 this.socket = IO.socket(args[0], opts);
-                this.socket.connect();
                 break;
             case 3:
                 this.instance = args.pop();
@@ -48,11 +49,11 @@ export class SocketIO extends common.SocketIO {
 
             }
         }))
-    };
+    }
 
     connect() {
         this.socket.connect();
-    };
+    }
 
     emit(...args: any[]) {
         let event = args[0];
@@ -72,20 +73,28 @@ export class SocketIO extends common.SocketIO {
             }));
         }
         this.socket.emit(event, payload);
-
-    };
+    }
 
     disconnect() {
         this.socket.disconnect();
-    };
+    }
 
     public get instance() {
         return this.socket;
-    };
+    }
 
     public set instance(instance) {
         this.socket = instance;
-    };
+    }
+
+    joinNamespace(nsp: String): void{
+        const manager = this.socket.io();
+        this.socket = manager.socket(nsp);
+        this.socket.connect();
+    }
+
+    leaveNamespace(): void{
+
+    }
 
 }
-

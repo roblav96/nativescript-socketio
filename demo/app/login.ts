@@ -13,13 +13,16 @@ let pageData = new Observable({
 export function navigatingTo() {
   socketIO = new SocketIO(server, {});
   socketIO.on('login', function (data) {
+    console.log("Login: ", data);
     frameModule.topmost().navigate({ moduleName: 'main-page', context: { username: pageData.get("username"), socket: socketIO.instance } })
   })
+  socketIO.connect();
+  socketIO.joinNamespace('/staff');
 }
 export function pageLoaded(args) {
   var page = args.object;
   page.bindingContext = pageData;
 }
 export function join(args) {
-  socketIO.emit('add user', { username: pageData.get("username") });
+  socketIO.emit('add user', { username: pageData.get('username') });
 }

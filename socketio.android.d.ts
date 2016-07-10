@@ -7,4 +7,6 @@ export declare class SocketIO extends common.SocketIO {
     emit(...args: any[]): void;
     disconnect(): void;
     instance: any;
+    joinNamespace(nsp: String): void;
+    leaveNamespace(): void;
 }
