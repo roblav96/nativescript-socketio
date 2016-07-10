@@ -3,9 +3,10 @@
 	"version": "2.0.0",
 	"description": "Socket.IO for nativescript",
 	"main": "socketio.js",
+	"typings":"socketio.d.ts",
 	"nativescript": {
 		"platforms": {
-			"android": "1.6.3",
+			"android": "1.6.0",
 			"ios": "1.6.0"
 		}
 	},

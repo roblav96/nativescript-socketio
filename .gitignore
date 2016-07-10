@@ -8,4 +8,5 @@ demo/platforms
 demo/node_modules
 node_modules
 demo/demo-server/node_modules
+platforms/android/src
 !helpers

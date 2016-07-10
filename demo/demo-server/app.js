@@ -12,7 +12,7 @@ let userList = [];
 
 io.on('connection', function (socket) {
 	console.log('User Connected');
-	socket.emit('connected',"Welcom")
+	socket.emit('connected',"Welcome")
 	let addedUser = false;
 	socket.on('add user', function (data) {
 		if (addedUser) return;

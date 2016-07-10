@@ -3,8 +3,8 @@ import {SocketIO} from 'nativescript-socketio';
 import {} from 'ui/page';
 import frameModule = require('ui/frame');
 let socketIO;
-const server = 'http://192.168.1.135:3001'; //using genymotion
-
+const server = 'http://192.168.56.1:3001'; //using genymotion
+//const server = 'http://localhost:3001';
 let pageData = new Observable({
   item: '',
   username: 'Osei'
@@ -24,6 +24,6 @@ export function pageLoaded(args) {
   page.bindingContext = pageData;
 }
 export function join(args) {
-  socketIO.leaveNamespace();
+ socketIO.leaveNamespace();
   socketIO.emit('add user', { username: pageData.get('username') });
 }
