@@ -3,8 +3,7 @@ declare var SocketAckEmitter;
 
 declare var NSURL;
 declare var NSDictionary;
-declare var NSArray;
-declare var NSObject;
+declare var NSMutableArray;
 
 export class SocketIO {
 
@@ -18,7 +17,23 @@ export class SocketIO {
     constructor(...args: any[]) {
         switch (args.length) {
             case 2:
-                const opts = new NSDictionary(["nsp"], ["/staff"]);
+                // Convert options to JS Array 
+                const keys = Object.keys(args[1]);
+                
+                // Marshal Connection Options
+                const keysNS = new NSMutableArray();
+                const valuesNS = new NSMutableArray();
+
+                for (let i = 0; i < keys.length; i++) {
+                    keysNS.addObject(keys[i]);
+                    valuesNS.addObject(args[1][keys[i]]);
+                }
+
+                // Create Options as NSDictionary
+                const opts = NSDictionary.dictionaryWithObjectsForKeys(valuesNS, keysNS);
+                console.dump(opts);
+
+                // Create Socket
                 this.socket = SocketIOClient.alloc().initWithSocketURLOptions(
                     NSURL.URLWithString(args[0]),
                     opts
