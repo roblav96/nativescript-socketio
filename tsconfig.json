@@ -4,14 +4,12 @@
         "module": "commonjs",
         "removeComments": true,
         "experimentalDecorators": true,
-        "sourceMap": true,
-        "declaration": true
+        "sourceMap": true
     },
     "files": [
-      "demo/node_modules/tns-core-modules/tns-core-modules.d.ts",
-      "socketio.common.ts",
-      "socketio.android.ts", 
-      "socketio.ios.ts"
+        "demo/node_modules/tns-core-modules/tns-core-modules.d.ts",
+        "socketio.android.ts",
+        "socketio.ios.ts"
     ],
     "compileOnSave": false
 }

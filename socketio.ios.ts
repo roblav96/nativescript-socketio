@@ -1,5 +1,3 @@
-import common = require('./socketio.common');
-
 declare var SocketIOClient;
 declare var SocketAckEmitter;
 
@@ -8,50 +6,48 @@ declare var NSDictionary;
 declare var NSArray;
 declare var NSObject;
 
-export class SocketIO extends common.SocketIO {
-    
+export class SocketIO {
+
     socket: any;
-    
+
     /**
      * Class Constructor
      * args[0]: Connection URL as String
      * args[1]: Connection Options
      */
     constructor(...args: any[]) {
-        super();
-        
         switch (args.length) {
             case 2:
-                const opts = new NSDictionary(["nsp"],["/staff"]);
+                const opts = new NSDictionary(["nsp"], ["/staff"]);
                 this.socket = SocketIOClient.alloc().initWithSocketURLOptions(
                     NSURL.URLWithString(args[0]),
                     opts
                 );
                 break;
-            
+
             case 3:
                 this.instance = args.pop();
                 break;
         }
     }
 
-    on(event: String, callback: Function) : void {
+    on(event: String, callback: Function): void {
 
-        this.socket.onCallback(event, (data, ack)=>{
+        this.socket.onCallback(event, (data, ack) => {
             console.log('Event: ', event);
             callback(data);
         });
     };
 
-    connect() : void {
+    connect(): void {
         this.socket.connect();
     }
 
-    emit(...args: any[]) : void {
+    emit(...args: any[]): void {
         if (!args) {
             return console.error('Emit Failed: No arguments');
         }
-        
+
         // Slice parameters into Event and Message/Ack Callback
         const event = args[0];
         const payload = Array.prototype.slice.call(args, 1);
@@ -60,7 +56,7 @@ export class SocketIO extends common.SocketIO {
         this.socket.emitWithItems(event, payload);
     }
 
-    disconnect() : void {
+    disconnect(): void {
         this.socket.disconect();
     }
 
@@ -72,11 +68,11 @@ export class SocketIO extends common.SocketIO {
         this.socket = instance;
     }
 
-    joinNamespace(nsp: String): void{
+    joinNamespace(nsp: String): void {
         this.socket.joinNamespace(nsp);
     }
 
-    leaveNamespace(): void{
+    leaveNamespace(): void {
         this.socket.leaveNamespace();
     }
 }

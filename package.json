@@ -1,6 +1,6 @@
 {
 	"name": "nativescript-socketio",
-	"version": "1.1.5",
+	"version": "2.0.0",
 	"description": "Socket.IO for nativescript",
 	"main": "socketio.js",
 	"nativescript": {
@@ -24,20 +24,28 @@
 		"NativeScript",
 		"JavaScript",
 		"Android",
+		"IOS",
 		"socket.io",
-		"io", 
+		"io",
 		"socket",
 		"events",
-		"tcp", 
+		"tcp",
 		"websocket",
 		"framework",
 		"realtime"
-		
 	],
 	"author": {
 		"name": "Osei Fortune",
-		"email": "fortune.osei@yahoo.com"
+		"email": "fortune.osei@yahoo.com",
+		"url": "https://github.com/triniwiz"
 	},
+	"contributors": [
+		{
+			"name": "Don Burgess",
+			"url": "https://github.com/db3dev",
+			"email": "don@db3dev.com"
+		}
+	],
 	"bugs": {
 		"url": "https://github.com/triniwiz/nativescript-socketio/issues"
 	},
