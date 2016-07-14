@@ -16,7 +16,6 @@ export function navigatingTo() {
     console.log("Login: ", data);
     frameModule.topmost().navigate({ moduleName: 'main-page', context: { username: pageData.get("username"), socket: socketIO.instance } })
   })
-  socketIO.joinNamespace('/chat');
   socketIO.connect();  
 }
 export function pageLoaded(args) {
@@ -24,6 +23,5 @@ export function pageLoaded(args) {
   page.bindingContext = pageData;
 }
 export function join(args) {
-  socketIO.leaveNamespace();
   socketIO.emit('add user', { username: pageData.get('username') });
 }
