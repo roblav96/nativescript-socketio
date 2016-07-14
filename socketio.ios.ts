@@ -1,67 +1,115 @@
-import {Observable} from 'data/observable';
-import {ObservableArray} from 'data/observable-array';
-import {Page, NavigatedData} from 'ui/page';
-import frameModule = require('ui/frame');
-import {SocketIO} from 'nativescript-socketio';
-let socketIO;
-import view = require('ui/core/view');
-let pageData: any = new Observable({
-  list: new ObservableArray(),
-  textMessage: '',
-  currentUser:''
-})
-let page;
-let context;
-export function navigatingTo(args:NavigatedData){
-   page = <Page>args.object;
-  context = page.navigationContext;
-  pageData.set("currentUser",context.username);
- socketIO = new SocketIO(null,null,context.socket);
- 
-socketIO.on('new message', function(data) {
-  pageData.list.push(data)
-  console.log(JSON.stringify(data));
-})
+declare var SocketIOClient;
+declare var SocketAckEmitter;
 
-socketIO.on('disconnect', function() {
- // pageData.list.push.length = 0;
-  frameModule.topmost().navigate('login')
-})
+declare var NSURL;
+declare var NSDictionary;
+declare var NSMutableArray;
 
-socketIO.on('getMessages', function(data) {
-  if (data.length > 0) {
-    if (pageData.list.length !== data.length) {
-      var messages = data;
-      for (let i = 0; i < messages.length; i++) {
-        pageData.list.push(messages[i])
-      }
+export class SocketIO {
+
+    socket: any;
+
+    /**
+     * Class Constructor
+     * args[0]: Connection URL as String
+     * args[1]: Connection Options
+     */
+    constructor(...args: any[]) {
+        switch (args.length) {
+            case 2:
+                // Convert options to JS Array 
+                const keys = Object.keys(args[1]);
+                
+                // Marshal Connection Options
+                const keysNS = new NSMutableArray();
+                const valuesNS = new NSMutableArray();
+
+                for (let i = 0; i < keys.length; i++) {
+                    keysNS.addObject(keys[i]);
+                    valuesNS.addObject(args[1][keys[i]]);
+                }
+
+                // Create Options as NSDictionary
+                const opts = NSDictionary.dictionaryWithObjectsForKeys(valuesNS, keysNS);
+                console.dump(opts);
+
+                // Create Socket
+                this.socket = SocketIOClient.alloc().initWithSocketURLOptions(
+                    NSURL.URLWithString(args[0]),
+                    opts
+                );
+                break;
+
+            case 3:
+                this.instance = args.pop();
+                break;
+        }
     }
-    console.log(JSON.stringify(data));
-  }
 
-})
-}
-export function pageLoaded(args: NavigatedData) {
-  page.bindingContext = pageData;
-  socketIO.emit('getMessages');
-}
-export function sendText() {
-  let data = {
-    username: context.username,
-    message: pageData.get("textMessage"),
-    timeStamp: +new Date()
-  };
+    on(event: String, callback: Function): void {
 
-  socketIO.emit('new message', data, (wasReceived)=>{
-    if (wasReceived) {
-      console.log(JSON.stringify(data));
-      pageData.list.push(data);
-      pageData.set("textMessage", "");
+        this.socket.onCallback(event, (data, ack) => {
+            console.log('Event: ', event);
+            callback(data);
+        });
+    };
+
+    connect(): void {
+        this.socket.connect();
     }
-  })
-  
-}
 
-export function logout(){
-    socketIO.disconnect();
+    emit(...args: any[]): void {
+        if (!args) {
+            return console.error('Emit Failed: No arguments');
+        }
+
+        // Slice parameters into Event and Message/Ack Callback
+        const event = args[0];
+        const payload = Array.prototype.slice.call(args, 1);
+
+        // Check for ack callback
+        let ack = payload.pop();
+        
+        // Remove ack if final argument is not a function
+        if (ack && typeof ack !== 'function') {
+            payload.push(ack);
+            ack = null;
+        }
+
+        // Send Emit
+        if (ack) {
+            
+            const ackCallback = (args) => {
+                ack.apply(null, args);
+            }
+
+            this.socket.emitWithAckWithItems(event, payload)(0, ackCallback);
+
+        }
+        else {
+            // Emit without Ack Callback
+            this.socket.emitWithItems(event, payload);
+        }
+        
+    }
+
+    disconnect(): void {
+        this.socket.disconect();
+    }
+
+    public get instance() {
+        return this.socket;
+    }
+
+    public set instance(instance) {
+        this.socket = instance;
+    }
+
+    joinNamespace(nsp: String): void {
+        this.socket.joinNamespace(nsp);
+    }
+
+    leaveNamespace(): void {
+        this.socket.leaveNamespace();
+    }
 }
