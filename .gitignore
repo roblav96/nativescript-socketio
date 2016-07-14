@@ -1,6 +1,7 @@
 *.js
 *.js.map
 *.log
+.vscode/*
 demo/app/*.js
 demo/app/*.js.map
 demo/*.d.ts

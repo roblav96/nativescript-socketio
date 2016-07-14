@@ -52,6 +52,10 @@ export class SocketIO {
     }
 
     emit(...args: any[]) {
+        if (!args) {
+            return console.error('Emit Failed: No arguments');
+        }
+
         let event = args[0];
         let payload = Array.prototype.slice.call(args, 1);
         let ack = payload.pop();
