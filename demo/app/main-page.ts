@@ -20,6 +20,7 @@ export function navigatingTo(args:NavigatedData){
  
 socketIO.on('new message', function(data) {
   pageData.list.push(data)
+  console.log(JSON.stringify(data));
 })
 
 socketIO.on('disconnect', function() {
@@ -35,6 +36,7 @@ socketIO.on('getMessages', function(data) {
         pageData.list.push(messages[i])
       }
     }
+    console.log(JSON.stringify(data));
   }
 
 })
@@ -50,9 +52,14 @@ export function sendText() {
     timeStamp: +new Date()
   };
 
-  socketIO.emit('new message', data)
-  pageData.list.push(data);
-  pageData.set("textMessage", "");
+  socketIO.emit('new message', data, (wasReceived)=>{
+    if (wasReceived) {
+      console.log(JSON.stringify(data));
+      pageData.list.push(data);
+      pageData.set("textMessage", "");
+    }
+  })
+  
 }
 
 export function logout(){

@@ -67,8 +67,30 @@ export class SocketIO {
         const event = args[0];
         const payload = Array.prototype.slice.call(args, 1);
 
-        // Send message (and optionally ack callback)
-        this.socket.emitWithItems(event, payload);
+        // Check for ack callback
+        let ack = payload.pop();
+        
+        // Remove ack if final argument is not a function
+        if (ack && typeof ack !== 'function') {
+            payload.push(ack);
+            ack = null;
+        }
+
+        // Send Emit
+        if (ack) {
+            
+            const ackCallback = (args) => {
+                ack.apply(null, args);
+            }
+
+            this.socket.emitWithAckWithItems(event, payload)(0, ackCallback);
+
+        }
+        else {
+            // Emit without Ack Callback
+            this.socket.emitWithItems(event, payload);
+        }
+        
     }
 
     disconnect(): void {

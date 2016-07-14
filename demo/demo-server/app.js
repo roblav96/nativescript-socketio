@@ -12,7 +12,7 @@ let userList = [];
 
 io.on('connection', function (socket) {
 	console.log('User Connected');
-	socket.emit('connected',"Welcome")
+	socket.emit('connected',"Welcom")
 	let addedUser = false;
 	socket.on('add user', function (data) {
 		if (addedUser) return;
@@ -25,8 +25,9 @@ io.on('connection', function (socket) {
 		})
 	})
 
-	socket.on('new message', function (data) {
-        console.log(data)
+	socket.on('new message', function (data, cb) {
+        cb(true);
+		console.log(data)
         messageList.push(data);
 		socket.broadcast.emit('new message', data);
 	})
