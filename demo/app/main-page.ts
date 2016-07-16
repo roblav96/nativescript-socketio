@@ -53,6 +53,7 @@ export function sendText() {
 
   socketIO.emit('new message', data, (wasReceived) => {
     if (wasReceived) {
+      console.log('ack executed');
       console.log(JSON.stringify(data));
       pageData.list.push(data);
       pageData.set("textMessage", "");

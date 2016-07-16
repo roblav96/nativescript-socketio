@@ -4,6 +4,7 @@ declare var SocketAckEmitter;
 declare var NSURL;
 declare var NSDictionary;
 declare var NSMutableArray;
+declare var UInt64;
 
 export class SocketIO {
 
@@ -31,7 +32,6 @@ export class SocketIO {
 
                 // Create Options as NSDictionary
                 const opts = NSDictionary.dictionaryWithObjectsForKeys(valuesNS, keysNS);
-                console.dump(opts);
 
                 // Create Socket
                 this.socket = SocketIOClient.alloc().initWithSocketURLOptions(
@@ -49,8 +49,15 @@ export class SocketIO {
     on(event: String, callback: Function): void {
 
         this.socket.onCallback(event, (data, ack) => {
-            console.log('Event: ', event);
-            callback(data);
+            
+            if (ack){
+                callback(data, ack);
+            }
+            else {
+                callback(data);
+            }
+            
+
         });
     };
 
@@ -78,12 +85,19 @@ export class SocketIO {
 
         // Send Emit
         if (ack) {
-            
-            const ackCallback = (args) => {
-                ack.apply(null, args);
-            }
 
-            this.socket.emitWithAckWithItems(event, payload)(0, ackCallback);
+            const emit = this.socket.emitWithAckWithItems(event, payload)
+            emit(0, (args)=> {
+                
+                // Convert Arguments to JS Array from NSArray
+                const marshalledArgs = [];
+                for (let i =0; i < args.count; i++){
+                    marshalledArgs.push(args.objectAtIndex(i));
+                }
+
+                // Call callback
+                ack.apply(null, marshalledArgs);
+            });
 
         }
         else {
