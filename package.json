@@ -1,6 +1,6 @@
 {
   "name": "nativescript-socketio",
-  "version": "2.2.0",
+  "version": "2.1.0",
   "description": "Socket.IO for nativescript",
   "main": "socketio.js",
   "nativescript": {
