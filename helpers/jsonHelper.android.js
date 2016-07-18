@@ -1,5 +1,8 @@
 'use strict'
-
+module.exports = {
+	deserialize: deserialize,
+	serialize: serialize
+}
 const JSONObject = org.json.JSONObject;
 const JSONArray = org.json.JSONArray;
 const JSONException = org.json.JSONException;
@@ -36,7 +39,6 @@ function serialize(value) {
 	}
 
 }
-exports.serialize = serialize;
 
 function deserialize(value) {
 	if (value === null || typeof value !== 'object') {
@@ -73,5 +75,3 @@ function deserialize(value) {
 	return store;
 
 }
-
-exports.deserialize = deserialize;

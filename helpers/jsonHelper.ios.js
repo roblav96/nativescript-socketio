@@ -1,9 +1,7 @@
 'use strict'
-function serialize(value) {
-
+module.exports = {
+	deserialize: deserialize,
+	serialize: serialize
 }
-module.serialize = serialize;
-function deserialize(value) {
-
-}
-module.deserialize = deserialize;
+function serialize(value) {}
+function deserialize(value) {}
