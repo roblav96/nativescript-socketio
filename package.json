@@ -1,6 +1,6 @@
 {
   "name": "nativescript-socketio",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Socket.IO for nativescript",
   "main": "socketio.js",
   "nativescript": {
@@ -14,7 +14,8 @@
     "demo.ios": "npm run preparedemo; cd demo; tns run ios",
     "demo.android": "npm run preparedemo; cd demo; tns run android",
     "preparedemo": "npm run build ; cd demo ; tns plugin remove nativescript-socketio ; tns plugin add .. ; tns install",
-    "setup": "cd demo; npm install; cd ..; cd demo; tns plugin add ..; cd .."
+    "setup": "cd demo; npm install; cd ..; cd demo; tns plugin add ..; cd ..",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
