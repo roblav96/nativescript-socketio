@@ -108,7 +108,7 @@ export class SocketIO {
     }
 
     disconnect(): void {
-        this.socket.disconect();
+        this.socket.disconnect();
     }
 
     public get instance() {
