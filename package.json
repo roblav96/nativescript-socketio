@@ -1,6 +1,6 @@
 {
   "name": "nativescript-socketio",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Socket.IO for nativescript",
   "main": "socketio.js",
   "nativescript": {
@@ -54,6 +54,8 @@
   "homepage": "https://github.com/triniwiz/nativescript-socketio",
   "readmeFilename": "README.md",
   "devDependencies": {
+     "tns-core-modules": "^2.2.0",
+    "tns-platform-declarations": "^2.2.0",
     "typescript": "^1.8.7"
   }
 }

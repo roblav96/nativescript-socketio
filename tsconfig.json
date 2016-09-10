@@ -7,7 +7,10 @@
         "sourceMap": true
     },
     "files": [
-        "demo/node_modules/tns-core-modules/tns-core-modules.d.ts",
+        "node_modules/tns-core-modules/tns-core-modules.d.ts",
+        "node_modules/tns-platform-declarations/tns-core-modules/android17.d.ts",
+        "node_modules/tns-platform-declarations/tns-core-modules/ios.d.ts",
+        "node_modules/tns-platform-declarations/tns-core-modules/org.nativescript.widgets.d.ts",
         "socketio.android.ts",
         "socketio.ios.ts"
     ],
