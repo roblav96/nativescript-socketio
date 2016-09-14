@@ -8,7 +8,7 @@ declare var UInt64;
 
 export class SocketIO {
 
-    socket: any;
+    private socket: any;
 
     /**
      * Class Constructor
@@ -20,7 +20,7 @@ export class SocketIO {
             case 2:
                 // Convert options to JS Array 
                 const keys = Object.keys(args[1]);
-                
+
                 // Marshal Connection Options
                 const keysNS = new NSMutableArray();
                 const valuesNS = new NSMutableArray();
@@ -58,14 +58,14 @@ export class SocketIO {
     on(event: String, callback: Function): void {
 
         this.socket.onCallback(event, (data, ack) => {
-            
-            if (ack){
+
+            if (ack) {
                 callback(data, ack);
             }
             else {
                 callback(data);
             }
-            
+
 
         });
     };
@@ -85,7 +85,7 @@ export class SocketIO {
 
         // Check for ack callback
         let ack = payload.pop();
-        
+
         // Remove ack if final argument is not a function
         if (ack && typeof ack !== 'function') {
             payload.push(ack);
@@ -96,11 +96,11 @@ export class SocketIO {
         if (ack) {
 
             const emit = this.socket.emitWithAckWithItems(event, payload)
-            emit(0, (args)=> {
-                
+            emit(0, (args) => {
+
                 // Convert Arguments to JS Array from NSArray
                 const marshalledArgs = [];
-                for (let i =0; i < args.count; i++){
+                for (let i = 0; i < args.count; i++) {
                     marshalledArgs.push(args.objectAtIndex(i));
                 }
 
@@ -113,7 +113,7 @@ export class SocketIO {
             // Emit without Ack Callback
             this.socket.emitWithItems(event, payload);
         }
-        
+
     }
 
     disconnect(): void {

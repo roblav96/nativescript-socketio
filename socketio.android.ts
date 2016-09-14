@@ -8,7 +8,7 @@ const JSONObject = org.json.JSONObject;
 const JSONArray = org.json.JSONArray;
 const JSONException = org.json.JSONException;
 export class SocketIO {
-    socket;
+    private socket: any;
     constructor(...args: any[]) {
         switch (args.length) {
             case 2:

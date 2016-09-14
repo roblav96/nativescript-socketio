@@ -7,6 +7,7 @@ demo/app/*.js.map
 demo/*.d.ts
 demo/platforms
 demo/node_modules
+demo/lib
 node_modules
 demo/demo-server/node_modules
 platforms/android/src
