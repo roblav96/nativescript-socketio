@@ -27,7 +27,16 @@ export class SocketIO {
 
                 for (let i = 0; i < keys.length; i++) {
                     keysNS.addObject(keys[i]);
-                    valuesNS.addObject(args[1][keys[i]]);
+                    if (typeof args[1][keys[i]] == 'object') {
+                        let obj = args[1][keys[i]]
+                        let key = new NSMutableArray()
+                        key.addObject(obj[0])
+                        let val = new NSMutableArray()
+                        val.addObject(obj[1])
+                        valuesNS.addObject(NSDictionary.dictionaryWithObjectsForKeys(val, key));
+                    } else {
+                        valuesNS.addObject(args[1][keys[i]]);
+                    }
                 }
 
                 // Create Options as NSDictionary
