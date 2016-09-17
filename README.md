@@ -11,6 +11,10 @@ Set connection string and options then connect
 var SocketIO = require('nativescript-socketio');
 var socketIO = new SocketIO(url,opts);
 ```
+Connect to server
+```js
+socketIO.connect()
+```
 
 Send data to the server
 ```js
